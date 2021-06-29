@@ -1,24 +1,77 @@
 <?php
-  // $url ="http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-  // $div = explode('/', $url);
-  // $page = end($div);
-  require_once 'core/config.php';
-  require_once 'pages/includes/header.html';
-  // // $pages = [
-  // //   'consult' => "http://localhost/sivo/pages/consult",
-  // //   "register" => "http://localhost/sivo/pages/register"
-  // // ];
-  // $page = ( empty($_GET['url']) OR !isset($_GET['url'])) ? 'home' : $_GET['url'];
-  // if (!file_exists(__DIR__.'\\'.'pages'.'\\'.$page.'.html') )
-	// {
-	//    require_once(__DIR__.'\\'.'pages'.'\\'.'erro.html');
-	// }
-	// else 
-	// {	
-  //   require_once(__DIR__.'\\'.'pages'.'\\'.$page.'.html');
-	// }
- 
-  // require_once 'pages/includes/footer.html';
+    // $url ="http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+    // $div = explode('/', $url);
+    // $page = end($div);
+    require_once 'core/config.php';
+    require_once 'pages/includes/header.html';
+    require_once 'core/conection.php';
+
+    // // $pages = [
+    // //   'consult' => "http://localhost/sivo/pages/consult",
+    // //   "register" => "http://localhost/sivo/pages/register"
+    // // ];
+    // $page = ( empty($_GET['url']) OR !isset($_GET['url'])) ? 'home' : $_GET['url'];
+    // if (!file_exists(__DIR__.'\\'.'pages'.'\\'.$page.'.html') )
+    // {
+    //    require_once(__DIR__.'\\'.'pages'.'\\'.'erro.html');
+    // }
+    // else 
+    // {	
+    //   require_once(__DIR__.'\\'.'pages'.'\\'.$page.'.html');
+    // }
+  if(isset($_POST['register_bi']))
+  {
+    $nome = $_POST['name'];
+    $bi = $_POST['bi'];
+
+    if(empty($nome)){
+      echo "<script>alert('Digite Seu nome para continuar.')</script>";
+    }elseif(empty($bi)){
+      echo "<script>alert('Digite Seu BI para continuar.')</script>";
+    }
+    else
+    {
+      $verBi = $pdo->prepare("SELECT * FROM voters WHERE codVoter = '$bi'");
+      $verBi->execute();
+      if($verBi->rowCount() > 0){
+        echo "<script>alert('Cadastramento não Efectuado, esse BI já foi registrado!')</script>";
+      }else {
+        $save = $pdo->prepare("INSERT INTO voters(name, codVoter) VALUES ('$nome', '$bi')");
+        $save->execute();
+
+        if($save->rowCount() > 0){
+          echo "<script>alert('Cadastramento Efectuado')</script>";
+        }else {
+          echo 'Erro ao salvar cadastramento';
+        }
+    }
+  }
+  }
+if(isset($_POST['register_n']))
+{
+    $nome = filter_input(INPUT_POST, 'name');
+    if($nome == ''){
+      echo "<script>alert('Não pode se cadastrar sem nome!')</script>";
+    }else
+      {
+        $div = explode(' ', $nome);
+        $last = end($div);
+        $F = $nome[0];
+        $l = $last[0];
+        $gera = rand(1000, 9999);
+        $codV = $F.$l.$gera.'-2022';
+        
+        $save = $pdo->prepare("INSERT INTO voters(name, codVoter) VALUES ('$nome', '$codV')");
+        $save->execute();
+
+        if($save->rowCount() > 0){
+          echo "<script>alert('Sr. `{$nome}` seu cadastro foi feito com sucesso, seu código de voto é `{$codV}` Anote-o ou faça uma captura de ecrã! E leve ele consigo para validar o seu voto. Lembra, votar é direito de todos!')</script>";
+        }else
+        {
+          echo 'BUG - Try Again Later';
+        }
+      }
+  }
 ?>
 <div class="container text-center p-3">
     <div class="row p-5 mt-4">
@@ -31,9 +84,26 @@
         </p>
       </div>
     </div>
-    <div class="row">
-
-    </div>
+</div>
+    <hr>
+<div class="container">
+  <div class="row"> <!-- <h4><strong>CADASTRE-SE AQUI</strong></h4> -->  
+    <form method="post" id="regi" class="form-control text-justify p-3 mt-13" style="color: white; background-color:#323238; border:none; width:48%; margin-left:25%;">
+      <strong class="text-center">CADASTRE-SE AQUI - PREENCHA TODOS OS CAMPOS</strong>
+      <hr>
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label"></label>
+        <input type="text" class="form-control" id="nome" name="name" aria-describedby="Nome" placeholder="Nome Completo">
+      </div>
+      <div class="input-group mb-3">
+        <label for="exampleInputEmail1" class="form-label"></label>
+        <input type="text" class="form-control mw-50" id="bi" name="bi" aria-describedby="Nome" placeholder="NIF ou Código">
+      </div>
+      <button type="submit" class="btn btn-success form-control" id="register_bi" name="register_bi">Cadastrar-se com BI</button><br><br>
+      <button type="submit" class="btn btn-warning form-control" id="register_n" name="register_n">Cadastrar-se com nº</button>
+    </form>
   </div>
-
+</div>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+<!-- <script src="src/registerBi.js"></script> -->
   <?php require_once 'pages/includes/footer.html' ?>
