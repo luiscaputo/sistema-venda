@@ -59,7 +59,8 @@ if(isset($_POST['register_n']))
         $F = $nome[0];
         $l = $last[0];
         $gera = rand(1000, 9999);
-        $codV = $F.$l.$gera.'-2022';
+        $data = date('y');
+        $codV = $F.$l.$gera.$data;
         
         $save = $pdo->prepare("INSERT INTO voters(name, codVoter) VALUES ('$nome', '$codV')");
         $save->execute();
@@ -99,8 +100,7 @@ if(isset($_POST['register_n']))
         <label for="exampleInputEmail1" class="form-label"></label>
         <input type="text" class="form-control mw-50" id="bi" name="bi" aria-describedby="Nome" placeholder="NIF ou Código">
       </div>
-      <button type="submit" class="btn btn-success form-control" id="register_bi" name="register_bi">Cadastrar-se com BI</button><br><br>
-      <button type="submit" class="btn btn-warning form-control" id="register_n" name="register_n">Cadastrar-se com nº</button>
+      <button type="submit" class="btn btn-success form-control" id="register_bi" name="register_bi">Gerar Meu Código Eleitoral</button><br><br>
     </form>
   </div>
 </div>
