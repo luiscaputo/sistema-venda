@@ -77,7 +77,7 @@ if(isset($_POST['gerar']))
             $gera = rand(1000, 9999);
             $codV = $F.$l.$gera.$data;
             
-            $save = $pdo->prepare("INSERT INTO voters(name, codVoter) VALUES ('$nome', '$codV')");
+            $save = $pdo->prepare("INSERT INTO voters(name, codVoter, birthDate, province) VALUES ('$nome', '$codV', '$birth', '$province')");
             $save->execute();
 
             if($save->rowCount() > 0){
