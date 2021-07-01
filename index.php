@@ -59,7 +59,8 @@ if(isset($_POST['register_n']))
         $F = $nome[0];
         $l = $last[0];
         $gera = rand(1000, 9999);
-        $codV = $F.$l.$gera.'-2022';
+        $data = date('y');
+        $codV = $F.$l.$gera.$data;
         
         $save = $pdo->prepare("INSERT INTO voters(name, codVoter) VALUES ('$nome', '$codV')");
         $save->execute();
