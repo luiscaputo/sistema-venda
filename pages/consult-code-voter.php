@@ -1,6 +1,6 @@
 <?php
   require_once '../core/conection.php';
-  require_once 'includes/header.php';
+  require_once 'includes/headerConsult.php';
   if(isset($_POST['consult'])){
     $name = filter_input(INPUT_POST, 'data');
     $consult = $pdo->prepare("SELECT * FROM voters WHERE name like '%$name%'");
@@ -25,10 +25,12 @@
         </tr>
         </table>
       ';
-      echo '<a href="../index">VOLTAR</a>';
+        echo '<div class="text-center"><a href="../index" class="text-center"><img src="../assets/img/return.png" alt="Voltar" width="50" style="color: white;"></a></div>'; 
       }
     }else{
+      echo '<div class="text-center"><a href="../index" class="text-center"><img src="../assets/img/notFound.svg" alt="Voltar" width="" style="color: white;"></a></div>'; 
       echo '<h3 class="text-center">NÃO HÁ REGISTRO COM ESSE NOME!</h3>';
+      echo '<div class="text-center"><a href="../index" class="text-center"><img src="../assets/img/return.png" alt="Voltar" width="50" style="color: white;"></a></div>'; 
       // return false;
     }
   }
