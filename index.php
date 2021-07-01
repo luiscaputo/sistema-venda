@@ -3,7 +3,7 @@
     // $div = explode('/', $url);
     // $page = end($div);
     require_once 'core/config.php';
-    require_once 'pages/includes/header.html';
+    require_once 'pages/includes/header.php';
     require_once 'core/conection.php';
 
     // // $pages = [
@@ -81,7 +81,7 @@ if(isset($_POST['gerar']))
             $save->execute();
 
             if($save->rowCount() > 0){
-              echo "<script>alert('Sr. `{$data}` seu cadastro foi feito com sucesso, seu código de voto é `{$codV}` Anote-o ou faça uma captura de ecrã! E leve ele consigo para validar o seu voto. Lembra, votar é direito de todos!')</script>";
+              echo "<script>alert('Sr. {$nome} seu cadastro foi feito com sucesso, seu código de voto é {$codV} Anote-o ou faça uma captura de ecrã! E leve ele consigo para validar o seu voto. Lembra, votar é direito de todos!')</script>";
             }else
             {
               echo 'BUG - Try Again Later';
@@ -147,4 +147,4 @@ if(isset($_POST['gerar']))
 </div>
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
 <!-- <script src="src/registerBi.js"></script> -->
-  <?php require_once 'pages/includes/footer.html' ?>
+  <?php require_once 'pages/includes/footer.php' ?>

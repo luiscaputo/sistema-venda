@@ -31,13 +31,14 @@
             <a class="nav-link active" href="../aboutUs.html" tabindex="-1" aria-disabled="true">Sobre Nós</a>
           </li>
         </ul>
-        <form class="d-flex" style="margin-right: 150px;">
-          <input class="form-control me-2" type="search" placeholder="Coloque aqui seu NIF" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Pesquisar...</button>
+        <form class="d-flex" style="margin-right: 150px;" name="" action="pages/consult-code-voter" method="post">
+          <input class="form-control me-2" type="search" placeholder="Consultar código de Voto" aria-label="Search" name="data">
+          <button class="btn btn-outline-success" type="submit" name="consult">Consultar</button>
         </form>
       </div>
     </div>
   </nav>
+  
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="../../assets/js/bootstrap.js"></script>
 </body>
