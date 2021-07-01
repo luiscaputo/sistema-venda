@@ -32,7 +32,7 @@
           </li>
         </ul>
         <form class="d-flex" style="margin-right: 150px;" name="" action="pages/consult-code-voter" method="post">
-          <input class="form-control me-2" type="search" placeholder="Consultar código de Voto" aria-label="Search" name="data">
+          <input class="form-control me-2" type="search" placeholder="Consultar código de Voto" aria-label="Search" name="data" required>
           <button class="btn btn-outline-success" type="submit" name="consult">Consultar</button>
         </form>
       </div>
