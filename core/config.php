@@ -7,11 +7,11 @@
 
   // Cominho base onde está localizado os arquivos do servidor
   define('DS', DIRECTORY_SEPARATOR);
-  define('KP_BASE', strstr(__DIR__, '\\'.'core', true).'\\' );
+  define('SV_BASE', strstr(__DIR__, '\\'.'core', true).'\\' );
 
   //bd_difiners
-  define('KP_SERVER', 'localhost');
-  define('KP_SERVER_USER', 'root');
-  define('KP_SERVER_pass', '');
-  define('KP_DB', 'kapay_db');
+  define('SV_SERVER', 'localhost');
+  define('SV_SERVER_USER', 'root');
+  define('SV_SERVER_pass', '');
+  define('SV_DB', 'Gvoto');
 ?>
