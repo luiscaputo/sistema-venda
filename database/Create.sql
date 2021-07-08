@@ -1,4 +1,4 @@
-drop database Gvoto;
+drop database if exists Gvoto;
 create database Gvoto
 default character set utf8
 default collate utf8_general_ci;
@@ -67,6 +67,18 @@ provincia  nvarchar(100) not null ,
 dataCriacao	date not null 
 ) default charset = utf8;
 
+#============= Tabela Data Votação ============= #
+
+drop table if exists `ConfigVotacao`;
+
+create table if not exists ConfigVotacao(
+id 	        int not null primary key auto_increment ,
+dataComeco date not null,
+horaInicio 	time not null,
+horaTermino time not null,
+estado enum('On','OFF') not null default 'On' 
+) default charset = utf8;
+
 #============= Tabela Votação ============= #
 
 drop table if exists `Votacao`;
@@ -75,14 +87,14 @@ create table if not exists Votacao(
 id 	     int not null primary key auto_increment ,
 idPartido int not null,
 idEleitor int not null,
+idConfig int not null,
 dataCriacao date not null,
-_data  nvarchar(100) not null ,
 foreign key (idPartido) references Partidos (id),
-foreign key (idPartido) references Eleitores (id)
+foreign key (idEleitor) references Eleitores (id),
+foreign key (idConfig) references ConfigVotacao (id)
 ) default charset = utf8;
 
-
-
+select *from eleitores;
 
 insert into usuario
 (
@@ -127,6 +139,34 @@ Create Procedure GetEleitores()
 
 begin		
         select id as Id, Nome as Eleitor, codVoto as CodVoto, dataNascimento as DataNascimento, provincia as Provincia, dataCriacao as DataRegistro from Eleitores;
+end $$
+
+Delimiter ;
+
+Drop procedure if exists `GetConfigVotacao`;
+Delimiter $$
+
+Create Procedure GetConfigVotacao()
+
+begin		
+        select id as Id, datacomeco as DataComeco, horaInicio as HoraInicio, horaTermino as HoraTermino, estado as Estado from ConfigVotacao order by(id) desc;
+end $$
+
+Delimiter ;
+
+Drop procedure if exists `GetVotaco`;
+Delimiter $$
+
+Create Procedure GetVotaco()
+
+begin		
+        select votacao.id as Id, partidos.nome as Partido, count(*) as Total, 
+		configvotacao.dataComeco as DataComeco, configvotacao.horaInicio as HoraInicio, configvotacao.horaTermino as HoraTermino,
+		votacao.dataCriacao as DataVotacao
+		from votacao
+		inner join partidos on votacao.idPartido = partidos.id
+		inner join configvotacao on votacao.idConfig = configvotacao.id
+		group by (votacao.idPartido);
 end $$
 
 Delimiter ;
