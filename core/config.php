@@ -13,5 +13,5 @@
   define('SV_SERVER', 'localhost');
   define('SV_SERVER_USER', 'root');
   define('SV_SERVER_pass', '');
-  define('SV_DB', 'bd_name');
+  define('SV_DB', 'Gvoto');
 ?>

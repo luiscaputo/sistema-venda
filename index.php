@@ -31,12 +31,12 @@
     }
     else
     {
-      $verBi = $pdo->prepare("SELECT * FROM voters WHERE codVoter = '$bi'");
+      $verBi = $pdo->prepare("SELECT * FROM Eleitores WHERE codVoto = '$bi'");
       $verBi->execute();
       if($verBi->rowCount() > 0){
         echo "<script>alert('Cadastramento não Efectuado, esse BI já foi registrado!')</script>";
       }else {
-        $save = $pdo->prepare("INSERT INTO voters(name, codVoter) VALUES ('$nome', '$bi')");
+        $save = $pdo->prepare("INSERT INTO Eleitores(nome, codVoto) VALUES ('$nome', '$bi')");
         $save->execute();
 
         if($save->rowCount() > 0){
@@ -83,7 +83,7 @@ if(isset($_POST['gerar']))
             $gera = rand(1000, 9999);
             $codV = $F.$l.$gera.$data.'-'.$pfl;
             
-            $save = $pdo->prepare("INSERT INTO voters(name, codVoter, birthDate, province) VALUES ('$nome', '$codV', '$birth', '$province')");
+            $save = $pdo->prepare("INSERT INTO Eleitores( nome, codVoto, dataNascimento, provincia, dataCriacao) VALUES ('$nome', '$codV', '$birth', '$province',now())");
             $save->execute();
 
             if($save->rowCount() > 0){
