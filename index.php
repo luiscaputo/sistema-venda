@@ -71,11 +71,17 @@ if(isset($_POST['gerar']))
             echo "<script>alert('Você ainda é menor de Idade e não pode Votar!')</script>";
           }else{
             $div = explode(' ', $nome);
+            $dvP = explode(' ', $province);
+            $lastP = end($dvP);
+            $pf = $province[0];
+            $pl = $lastP[0];
+            $pfl = strtoupper($pf.$pl);
             $last = end($div);
             $F = $nome[0];
             $l = $last[0];
+
             $gera = rand(1000, 9999);
-            $codV = $F.$l.$gera.$data;
+            $codV = $F.$l.$gera.$data.'-'.$pfl;
             
             $save = $pdo->prepare("INSERT INTO voters(name, codVoter, birthDate, province) VALUES ('$nome', '$codV', '$birth', '$province')");
             $save->execute();
@@ -122,10 +128,10 @@ if(isset($_POST['gerar']))
         <select name="province" id="" class="form-control">
           <option value="" selected>Selecione sua província</option>
           <option value="Luanda">Luanda</option>
-          <option value="Lunda-Sul">Lunda-Sul</option>
-          <option value="Lunda-Norte">Lunda-Norte</option>
-          <option value="Kwanza-Sul">Kwanza-Sul</option>
-          <option value="Kwanza-Norte">Kwanza-Norte</option>
+          <option value="Lunda Sul">Lunda-Sul</option>
+          <option value="Lunda Norte">Lunda-Norte</option>
+          <option value="Kwanza Sul">Kwanza-Sul</option>
+          <option value="Kwanza Norte">Kwanza-Norte</option>
           <option value="Moxico">Moxico</option>
           <option value="Bengo">Bengo</option>
           <option value="Uíge">Uíge</option>
@@ -133,7 +139,7 @@ if(isset($_POST['gerar']))
           <option value="Benguela">Benguela</option>
           <option value="Namibe">Namibe</option>
           <option value="Cunene">Cunene</option>
-          <option value="Cuando-Cubango">Cuando-Cubango</option>
+          <option value="Cuando Cubango">Cuando-Cubango</option>
           <option value="Bié">Bié</option>
           <option value="Malange">Malange</option>
           <option value="Cabinda">Cabinda</option>

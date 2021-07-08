@@ -22,10 +22,12 @@
           <td>'.$data['name'].'</td>
           <td><b>'.$data['codVoter'].'<b></td>     
           <td>'.$data['created_at'].'</td>
+        
+      ';
+        echo '
         </tr>
         </table>
-      ';
-        echo '<div class="text-center"><a href="../index" class="text-center"><img src="../assets/img/return.png" alt="Voltar" width="50" style="color: white;"></a></div>'; 
+        <div class="text-center"><a href="../index" class="text-center"><img src="../assets/img/return.png" alt="Voltar" width="50" style="color: white;"></a></div>'; 
       }
     }else{
       echo '<div class="text-center"><a href="../index" class="text-center"><img src="../assets/img/notFound.svg" alt="Voltar" width="" style="color: white;"></a></div>'; 
