@@ -149,7 +149,11 @@ if(isset($_POST['gerar']))
       </div>
       <button type="submit" class="btn btn-success form-control" id="register_bi" name="gerar">Gerar Meu Código Eleitoral</button><br><br>
     </form>
+   
   </div>
+  
+  <br><hr>
+
 </div>
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
 <!-- <script src="src/registerBi.js"></script> -->

@@ -28,7 +28,7 @@ JavaScript Bundle with Popper -->
             <a class="nav-link active" href="#regi">Cadastrar-se</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="../aboutUs.html" tabindex="-1" aria-disabled="true">Sobre Nós</a>
+            <a class="nav-link active" href="pages/aboutUs" tabindex="-1" aria-disabled="true">Status das votações</a>
           </li>
         </ul>
         <form class="d-flex" style="margin-right: 150px;" name="" action="pages/consult-code-voter" method="post">
