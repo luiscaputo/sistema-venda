@@ -152,8 +152,6 @@ if(isset($_POST['gerar']))
    
   </div>
   
-  <br><hr>
-
 </div>
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
 <!-- <script src="src/registerBi.js"></script> -->

@@ -20,21 +20,28 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-  
+<?php 
+  include_once '../core/conection.php';
+  $votacoes = $pdo->prepare("SELECT * FROM votacao");
+  $votacoes->execute();
+
+  while($res = $votacoes->fetch(PDO::FETCH_ASSOC)){
+    echo '
+        <th scope="row">'.$res["id"].'</th>
+        <td>'.$res["idPartido"].'</td>
+        <td>'.$res["idPartido"].'</td>
+        <td>'.$res["idPartido"].'</td>
+
+    ';
+  }
+?>
+
   </tbody>
-</table>
+</table><br>
+<div class="text-center">
+  <a href="../index" class="text-center">
+    <img src="../assets/img/return.png" alt="Voltar" width="50" style="color: white;">
+  </a></div>
   </div>
 </body>
 </html>
